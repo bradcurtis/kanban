@@ -1,13 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component, useState } from 'react';
-import Column from "./Column"
+import Column from "./Components/Column"
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Droppable } from 'react-beautiful-dnd';
+import { getKanbanItems } from './api/kanbanapi';
 
 
 
 class App extends Component{
+  
+
    handleOnDragEnd(result) {
     console.log(result);
 
@@ -39,11 +42,25 @@ class App extends Component{
 
   }
 
+   getEntries =  () => {
+    const logEntries =  getKanbanItems('http://localhost:1337');
+    return {columns: logEntries};
+    
+  };
+
   constructor(props) {
     super(props);
+
+    
    
     this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
-    this.state = {
+
+    this.state = this.getEntries();
+
+    console.log(this.state.columns);
+
+  
+   /* this.state = {
       columns:[
         {
           name: 'Backlog',
@@ -76,13 +93,13 @@ class App extends Component{
           ]
         }           
       ]
-    }
+    }*/
   }
 
  
   
 render() {
-  
+ 
   return (
     <div className="App">
       <DragDropContext onDragEnd={this.handleOnDragEnd}>
