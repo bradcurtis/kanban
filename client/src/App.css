@@ -1,0 +1,18 @@
+.App {
+  display: flex;
+}
+
+.column{
+ border: 1px red solid;
+ flex-grow: 1;
+ margin: 25px;
+}
+.card{
+  padding: 25px;
+  border: 1px blue solid;
+  display: flex;
+}
+
+.parentdiv{
+  display: flex;
+}
